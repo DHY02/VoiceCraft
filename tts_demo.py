@@ -15,7 +15,7 @@ import numpy as np
 import torchaudio
 import torch
 import os
-os.environ["USER"] = "me"  # TODO change this to your username
+os.environ["USER"] = "root"  # TODO change this to your username
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 

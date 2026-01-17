@@ -4,7 +4,8 @@ import os, random
 import numpy as np
 import torch
 import torchaudio
-
+from models import voicecraft
+from huggingface_hub import hf_hub_download
 from data.tokenizer import (
     AudioTokenizer,
     TextTokenizer,
@@ -18,7 +19,7 @@ import argparse, time, tqdm
 # this script only works for the musicgen architecture
 def get_args():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument("--manifest_fn", type=str, default="path/to/eval_metadata_file")
+    parser.add_argument("--manifest_fn", type=str, default="/tsdata2/dhy/tse/VoiceCraft/mix.txt")
     parser.add_argument("--audio_root", type=str, default="path/to/audio_folder")
     parser.add_argument("--exp_dir", type=str, default="path/to/model_folder")
     parser.add_argument("--left_margin", type=float, default=0.08, help="extra space on the left to the word boundary")
@@ -84,15 +85,18 @@ def inference_one_sample(model, model_args, phn2num, text_tokenizer, audio_token
     return original_sample, generated_sample
 
 def get_model(exp_dir, device=None):
-    with open(os.path.join(exp_dir, "args.pkl"), "rb") as f:
-        model_args = pickle.load(f)
+    voicecraft_name="giga830M.pth"
+    filepath = f"{exp_dir}/{voicecraft_name}"
+    ckpt = torch.load(filepath, map_location="cpu")
+    
+    model_args = ckpt["config"]
 
     logging.info("load model weights...")
     model = voicecraft.VoiceCraft(model_args)
-    ckpt_fn = os.path.join(exp_dir, "best_bundle.pth")
-    ckpt = torch.load(ckpt_fn, map_location='cpu')['model']
-    phn2num = torch.load(ckpt_fn, map_location='cpu')['phn2num']
-    model.load_state_dict(ckpt)
+    # ckpt_fn = os.path.join(exp_dir, "best_bundle.pth")
+
+    phn2num = ckpt["phn2num"]
+    model.load_state_dict(ckpt['model'])
     del ckpt
     logging.info("done loading weights...")
     if device == None:
@@ -141,7 +145,7 @@ if __name__ == "__main__":
     logging.basicConfig(format=formatter, level=logging.INFO)
     args = get_args()
     # args.device = 'cpu'
-    args.allowed_repeat_tokens = eval(args.allowed_repeat_tokens)
+    # args.allowed_repeat_tokens = eval(args.allowed_repeat_tokens)
     seed_everything(args.seed)
 
     # load model
@@ -168,9 +172,9 @@ if __name__ == "__main__":
     new_spans = []
     orig_spans = []
     os.makedirs(args.output_dir, exist_ok=True)
-    if args.crop_concat:
-        mfa_temp = f"{args.output_dir}/mfa_temp"
-        os.makedirs(mfa_temp, exist_ok=True)
+    # if args.crop_concat:
+    #     mfa_temp = f"{args.output_dir}/mfa_temp"
+    #     os.makedirs(mfa_temp, exist_ok=True)
     for item in manifest:
         audio_fn = os.path.join(args.audio_root, item[0])
         temp = torchaudio.info(audio_fn)
@@ -186,7 +190,10 @@ if __name__ == "__main__":
         all_ind_intervals = item[3].split("|")
         editTypes = item[5].split("|")
         smaller_indx = []
-        alignment_fn = os.path.join(args.audio_root, "aligned", item[0].replace(".wav", ".csv"))
+        audio_name_wo_snr = item[0].split('_snr')
+        if len(audio_name_wo_snr) > 1:
+            audio_name_wo_snr = audio_name_wo_snr[0] + ".wav"
+        alignment_fn = os.path.join(args.audio_root, "aligned", audio_name_wo_snr.replace(".wav", ".csv"))
         if not os.path.isfile(alignment_fn):
             alignment_fn = alignment_fn.replace("/aligned/", "/aligned_csv/")
             assert os.path.isfile(alignment_fn), alignment_fn
@@ -205,7 +212,7 @@ if __name__ == "__main__":
     for i, (audio_fn, target_text, mask_interval) in enumerate(tqdm.tqdm(zip(audio_fns, target_texts, mask_intervals))):
         orig_mask_interval = mask_interval
         mask_interval = [[round(cmi[0]*args.codec_sr), round(cmi[1]*args.codec_sr)] for cmi in mask_interval]
-        # logging.info(f"i: {i}, mask_interval: {mask_interval}")
+        logging.info(f"i: {i}, mask_interval: {mask_interval}, do infer")
         mask_interval = torch.LongTensor(mask_interval) # [M,2]
         orig_audio, new_audio = inference_one_sample(model, model_args, phn2num, text_tokenizer, audio_tokenizer, audio_fn, target_text, mask_interval, args.device, vars(args))
         

@@ -617,6 +617,7 @@ class VoiceCraft(
         # make mask_interval and non_mask_interval
         y_len = y.shape[2]
         y_lens = torch.LongTensor([y_len]).to(y.device)
+        
         mask_interval = mask_interval[0]
         starts =  [item[0].item() for item in mask_interval] + [y_len]
         ends = [0] + [item[1].item() for item in mask_interval]

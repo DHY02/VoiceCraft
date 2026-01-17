@@ -1,0 +1,244 @@
+/work/anaconda/envs/dhy_voicecraft/lib/python3.9/site-packages/torchmetrics/utilities/imports.py:22: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import DistributionNotFound, get_distribution
+2025-08-06 10:45:18,066 [INFO] inference_speech_editing_scale.py:153 || loading model from /tsdata2/dhy/models/VoiceCraft
+/tsdata2/dhy/tse/VoiceCraft/infer_for_eval/../inference_speech_editing_scale.py:90: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  ckpt = torch.load(filepath, map_location="cpu")
+2025-08-06 10:45:20,648 [INFO] inference_speech_editing_scale.py:94 || load model weights...
+2025-08-06 10:45:22,219 [INFO] inference_speech_editing_scale.py:101 || done loading weights...
+2025-08-06 10:45:31,643 [INFO] inference_speech_editing_scale.py:157 || loading model done, took 13.5766 sec
+2025-08-06 10:45:32,026 [WARNING] _cpp_lib.py:137 || WARNING[XFORMERS]: xFormers can't load C++/CUDA extensions. xFormers was built for:
+    PyTorch 2.0.1+cu118 with CUDA 1108 (you have 2.5.0+cu121)
+    Python  3.9.18 (you have 3.9.23)
+  Please reinstall xformers (see https://github.com/facebookresearch/xformers#installing-xformers)
+  Memory-efficient attention, SwiGLU, sparse and more won't be available.
+  Set XFORMERS_MORE_DETAILS=1 for more details
+/work/anaconda/envs/dhy_voicecraft/lib/python3.9/site-packages/xformers/ops/swiglu_op.py:107: FutureWarning: `torch.cuda.amp.custom_fwd(args...)` is deprecated. Please use `torch.amp.custom_fwd(args..., device_type='cuda')` instead.
+  def forward(cls, ctx, x, w1, b1, w2, b2, w3, b3):
+/work/anaconda/envs/dhy_voicecraft/lib/python3.9/site-packages/xformers/ops/swiglu_op.py:128: FutureWarning: `torch.cuda.amp.custom_bwd(args...)` is deprecated. Please use `torch.amp.custom_bwd(args..., device_type='cuda')` instead.
+  def backward(cls, ctx, dx5):
+2025-08-06 10:45:33,202 [INFO] compression.py:286 || Loading compression model from checkpoint: /tsdata2/dhy/models/VoiceCraft/encodec_4cb2048_giga.th
+2025-08-06 10:45:33,803 [INFO] environment.py:56 || Detecting cluster type ClusterType.DEFAULT
+2025-08-06 10:45:33,807 [WARNING] environment.py:110 || Dora directory: /tmp/audiocraft_root
+/tsdata2/dhy/tse/VoiceCraft/src/audiocraft/audiocraft/utils/checkpoint.py:93: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state = torch.load(checkpoint_path, 'cpu')
+2025-08-06 10:45:34,691 [INFO] checkpoint.py:94 || Checkpoint loaded from /tsdata2/dhy/models/VoiceCraft/encodec_4cb2048_giga.th
+/work/anaconda/envs/dhy_voicecraft/lib/python3.9/site-packages/torch/nn/utils/weight_norm.py:143: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+2025-08-06 10:45:35,193 [INFO] compression.py:300 || Compression model loaded!
+0it [00:00, ?it/s]2025-08-06 10:45:35,329 [INFO] inference_speech_editing_scale.py:215 || i: 0, mask_interval: [[128, 314]], do infer
+2025-08-06 10:45:35,331 [WARNING] words_mismatch.py:88 || words count mismatch on 300.0% of the lines (3/1)
+2025-08-06 10:45:35,594 [INFO] inference_speech_editing_scale.py:55 || with direct encodec encoding before input, original audio length: 361 codec frames, which is 7.22 sec.
+2025-08-06 10:45:35,702 [INFO] voicecraft.py:708 || silence tokens: [1388, 1898, 131], note that if you are not using the pretrained encodec 6f79c6a8, make sure you specified it yourself, rather than using the default
+2025-08-06 10:45:37,177 [INFO] inference_speech_editing_scale.py:71 || inference on one sample take: 1.5832 sec.
+2025-08-06 10:45:37,177 [INFO] inference_speech_editing_scale.py:74 || generated encoded_frames.shape: torch.Size([1, 4, 252]), which is 5.04 sec.
+1it [00:01,  1.97s/it]2025-08-06 10:45:37,298 [INFO] inference_speech_editing_scale.py:215 || i: 1, mask_interval: [[128, 314]], do infer
+2025-08-06 10:45:37,299 [WARNING] words_mismatch.py:88 || words count mismatch on 300.0% of the lines (3/1)
+2025-08-06 10:45:37,316 [INFO] inference_speech_editing_scale.py:55 || with direct encodec encoding before input, original audio length: 361 codec frames, which is 7.22 sec.
+2025-08-06 10:45:37,336 [INFO] voicecraft.py:708 || silence tokens: [1388, 1898, 131], note that if you are not using the pretrained encodec 6f79c6a8, make sure you specified it yourself, rather than using the default
+2025-08-06 10:45:38,737 [INFO] inference_speech_editing_scale.py:71 || inference on one sample take: 1.4215 sec.
+2025-08-06 10:45:38,737 [INFO] inference_speech_editing_scale.py:74 || generated encoded_frames.shape: torch.Size([1, 4, 252]), which is 5.04 sec.
+2it [00:03,  1.72s/it]2025-08-06 10:45:38,851 [INFO] inference_speech_editing_scale.py:215 || i: 2, mask_interval: [[128, 314]], do infer
+2025-08-06 10:45:38,852 [WARNING] words_mismatch.py:88 || words count mismatch on 300.0% of the lines (3/1)
+2025-08-06 10:45:38,868 [INFO] inference_speech_editing_scale.py:55 || with direct encodec encoding before input, original audio length: 361 codec frames, which is 7.22 sec.
+2025-08-06 10:45:38,889 [INFO] voicecraft.py:708 || silence tokens: [1388, 1898, 131], note that if you are not using the pretrained encodec 6f79c6a8, make sure you specified it yourself, rather than using the default
+2025-08-06 10:45:40,467 [INFO] inference_speech_editing_scale.py:71 || inference on one sample take: 1.5987 sec.
+2025-08-06 10:45:40,467 [INFO] inference_speech_editing_scale.py:74 || generated encoded_frames.shape: torch.Size([1, 4, 263]), which is 5.26 sec.
+3it [00:05,  1.73s/it]2025-08-06 10:45:40,587 [INFO] inference_speech_editing_scale.py:215 || i: 3, mask_interval: [[128, 314]], do infer
+2025-08-06 10:45:40,588 [WARNING] words_mismatch.py:88 || words count mismatch on 300.0% of the lines (3/1)
+2025-08-06 10:45:40,602 [INFO] inference_speech_editing_scale.py:55 || with direct encodec encoding before input, original audio length: 361 codec frames, which is 7.22 sec.
+2025-08-06 10:45:40,626 [INFO] voicecraft.py:708 || silence tokens: [1388, 1898, 131], note that if you are not using the pretrained encodec 6f79c6a8, make sure you specified it yourself, rather than using the default
+2025-08-06 10:45:42,106 [INFO] inference_speech_editing_scale.py:71 || inference on one sample take: 1.5033 sec.
+2025-08-06 10:45:42,106 [INFO] inference_speech_editing_scale.py:74 || generated encoded_frames.shape: torch.Size([1, 4, 257]), which is 5.14 sec.
+4it [00:06,  1.69s/it]2025-08-06 10:45:42,226 [INFO] inference_speech_editing_scale.py:215 || i: 4, mask_interval: [[128, 314]], do infer
+2025-08-06 10:45:42,227 [WARNING] words_mismatch.py:88 || words count mismatch on 300.0% of the lines (3/1)
+2025-08-06 10:45:42,241 [INFO] inference_speech_editing_scale.py:55 || with direct encodec encoding before input, original audio length: 361 codec frames, which is 7.22 sec.
+2025-08-06 10:45:42,264 [INFO] voicecraft.py:708 || silence tokens: [1388, 1898, 131], note that if you are not using the pretrained encodec 6f79c6a8, make sure you specified it yourself, rather than using the default
+2025-08-06 10:45:43,708 [INFO] inference_speech_editing_scale.py:71 || inference on one sample take: 1.4667 sec.
+2025-08-06 10:45:43,708 [INFO] inference_speech_editing_scale.py:74 || generated encoded_frames.shape: torch.Size([1, 4, 255]), which is 5.1 sec.
+5it [00:08,  1.66s/it]2025-08-06 10:45:43,825 [INFO] inference_speech_editing_scale.py:215 || i: 5, mask_interval: [[128, 314]], do infer
+2025-08-06 10:45:43,826 [WARNING] words_mismatch.py:88 || words count mismatch on 300.0% of the lines (3/1)
+2025-08-06 10:45:43,839 [INFO] inference_speech_editing_scale.py:55 || with direct encodec encoding before input, original audio length: 361 codec frames, which is 7.22 sec.
+2025-08-06 10:45:43,863 [INFO] voicecraft.py:708 || silence tokens: [1388, 1898, 131], note that if you are not using the pretrained encodec 6f79c6a8, make sure you specified it yourself, rather than using the default
+2025-08-06 10:45:45,382 [INFO] inference_speech_editing_scale.py:71 || inference on one sample take: 1.5431 sec.
+2025-08-06 10:45:45,382 [INFO] inference_speech_editing_scale.py:74 || generated encoded_frames.shape: torch.Size([1, 4, 257]), which is 5.14 sec.
+6it [00:10,  1.67s/it]2025-08-06 10:45:45,503 [INFO] inference_speech_editing_scale.py:215 || i: 6, mask_interval: [[86, 100]], do infer
+2025-08-06 10:45:45,504 [WARNING] words_mismatch.py:88 || words count mismatch on 400.0% of the lines (4/1)
+2025-08-06 10:45:45,526 [INFO] inference_speech_editing_scale.py:55 || with direct encodec encoding before input, original audio length: 184 codec frames, which is 3.68 sec.
+2025-08-06 10:45:45,538 [INFO] voicecraft.py:708 || silence tokens: [1388, 1898, 131], note that if you are not using the pretrained encodec 6f79c6a8, make sure you specified it yourself, rather than using the default
+2025-08-06 10:45:46,224 [INFO] inference_speech_editing_scale.py:71 || inference on one sample take: 0.6984 sec.
+2025-08-06 10:45:46,224 [INFO] inference_speech_editing_scale.py:74 || generated encoded_frames.shape: torch.Size([1, 4, 196]), which is 3.92 sec.
+7it [00:10,  1.39s/it]2025-08-06 10:45:46,313 [INFO] inference_speech_editing_scale.py:215 || i: 7, mask_interval: [[86, 100]], do infer
+2025-08-06 10:45:46,313 [WARNING] words_mismatch.py:88 || words count mismatch on 400.0% of the lines (4/1)
+2025-08-06 10:45:46,324 [INFO] inference_speech_editing_scale.py:55 || with direct encodec encoding before input, original audio length: 184 codec frames, which is 3.68 sec.
+2025-08-06 10:45:46,335 [INFO] voicecraft.py:708 || silence tokens: [1388, 1898, 131], note that if you are not using the pretrained encodec 6f79c6a8, make sure you specified it yourself, rather than using the default
+2025-08-06 10:45:46,959 [INFO] inference_speech_editing_scale.py:71 || inference on one sample take: 0.6356 sec.
+2025-08-06 10:45:46,960 [INFO] inference_speech_editing_scale.py:74 || generated encoded_frames.shape: torch.Size([1, 4, 202]), which is 4.04 sec.
+8it [00:11,  1.18s/it]2025-08-06 10:45:47,049 [INFO] inference_speech_editing_scale.py:215 || i: 8, mask_interval: [[86, 100]], do infer
+2025-08-06 10:45:47,050 [WARNING] words_mismatch.py:88 || words count mismatch on 400.0% of the lines (4/1)
+2025-08-06 10:45:47,060 [INFO] inference_speech_editing_scale.py:55 || with direct encodec encoding before input, original audio length: 184 codec frames, which is 3.68 sec.
+2025-08-06 10:45:47,072 [INFO] voicecraft.py:708 || silence tokens: [1388, 1898, 131], note that if you are not using the pretrained encodec 6f79c6a8, make sure you specified it yourself, rather than using the default
+2025-08-06 10:45:47,602 [INFO] inference_speech_editing_scale.py:71 || inference on one sample take: 0.5419 sec.
+2025-08-06 10:45:47,602 [INFO] inference_speech_editing_scale.py:74 || generated encoded_frames.shape: torch.Size([1, 4, 196]), which is 3.92 sec.
+9it [00:12,  1.01s/it]2025-08-06 10:45:47,691 [INFO] inference_speech_editing_scale.py:215 || i: 9, mask_interval: [[86, 100]], do infer
+2025-08-06 10:45:47,692 [WARNING] words_mismatch.py:88 || words count mismatch on 400.0% of the lines (4/1)
+2025-08-06 10:45:47,702 [INFO] inference_speech_editing_scale.py:55 || with direct encodec encoding before input, original audio length: 184 codec frames, which is 3.68 sec.
+2025-08-06 10:45:47,716 [INFO] voicecraft.py:708 || silence tokens: [1388, 1898, 131], note that if you are not using the pretrained encodec 6f79c6a8, make sure you specified it yourself, rather than using the default
+2025-08-06 10:45:48,326 [INFO] inference_speech_editing_scale.py:71 || inference on one sample take: 0.6231 sec.
+2025-08-06 10:45:48,326 [INFO] inference_speech_editing_scale.py:74 || generated encoded_frames.shape: torch.Size([1, 4, 201]), which is 4.02 sec.
+10it [00:13,  1.08it/s]2025-08-06 10:45:48,415 [INFO] inference_speech_editing_scale.py:215 || i: 10, mask_interval: [[86, 100]], do infer
+2025-08-06 10:45:48,416 [WARNING] words_mismatch.py:88 || words count mismatch on 400.0% of the lines (4/1)
+2025-08-06 10:45:48,427 [INFO] inference_speech_editing_scale.py:55 || with direct encodec encoding before input, original audio length: 184 codec frames, which is 3.68 sec.
+2025-08-06 10:45:48,438 [INFO] voicecraft.py:708 || silence tokens: [1388, 1898, 131], note that if you are not using the pretrained encodec 6f79c6a8, make sure you specified it yourself, rather than using the default
+2025-08-06 10:45:48,949 [INFO] inference_speech_editing_scale.py:71 || inference on one sample take: 0.5227 sec.
+2025-08-06 10:45:48,950 [INFO] inference_speech_editing_scale.py:74 || generated encoded_frames.shape: torch.Size([1, 4, 195]), which is 3.9 sec.
+11it [00:13,  1.20it/s]2025-08-06 10:45:49,039 [INFO] inference_speech_editing_scale.py:215 || i: 11, mask_interval: [[86, 100]], do infer
+2025-08-06 10:45:49,040 [WARNING] words_mismatch.py:88 || words count mismatch on 400.0% of the lines (4/1)
+2025-08-06 10:45:49,051 [INFO] inference_speech_editing_scale.py:55 || with direct encodec encoding before input, original audio length: 184 codec frames, which is 3.68 sec.
+2025-08-06 10:45:49,062 [INFO] voicecraft.py:708 || silence tokens: [1388, 1898, 131], note that if you are not using the pretrained encodec 6f79c6a8, make sure you specified it yourself, rather than using the default
+2025-08-06 10:45:49,672 [INFO] inference_speech_editing_scale.py:71 || inference on one sample take: 0.6216 sec.
+2025-08-06 10:45:49,672 [INFO] inference_speech_editing_scale.py:74 || generated encoded_frames.shape: torch.Size([1, 4, 201]), which is 4.02 sec.
+12it [00:14,  1.25it/s]2025-08-06 10:45:49,762 [INFO] inference_speech_editing_scale.py:215 || i: 12, mask_interval: [[55, 86]], do infer
+2025-08-06 10:45:49,763 [WARNING] words_mismatch.py:88 || words count mismatch on 200.0% of the lines (2/1)
+2025-08-06 10:45:49,812 [INFO] inference_speech_editing_scale.py:55 || with direct encodec encoding before input, original audio length: 213 codec frames, which is 4.26 sec.
+2025-08-06 10:45:49,823 [INFO] voicecraft.py:708 || silence tokens: [1388, 1898, 131], note that if you are not using the pretrained encodec 6f79c6a8, make sure you specified it yourself, rather than using the default
+2025-08-06 10:45:50,128 [INFO] inference_speech_editing_scale.py:71 || inference on one sample take: 0.3158 sec.
+2025-08-06 10:45:50,128 [INFO] inference_speech_editing_scale.py:74 || generated encoded_frames.shape: torch.Size([1, 4, 190]), which is 3.8 sec.
+13it [00:14,  1.44it/s]2025-08-06 10:45:50,224 [INFO] inference_speech_editing_scale.py:215 || i: 13, mask_interval: [[55, 86]], do infer
+2025-08-06 10:45:50,225 [WARNING] words_mismatch.py:88 || words count mismatch on 200.0% of the lines (2/1)
+2025-08-06 10:45:50,240 [INFO] inference_speech_editing_scale.py:55 || with direct encodec encoding before input, original audio length: 213 codec frames, which is 4.26 sec.
+2025-08-06 10:45:50,252 [INFO] voicecraft.py:708 || silence tokens: [1388, 1898, 131], note that if you are not using the pretrained encodec 6f79c6a8, make sure you specified it yourself, rather than using the default
+2025-08-06 10:45:50,483 [INFO] inference_speech_editing_scale.py:71 || inference on one sample take: 0.2425 sec.
+2025-08-06 10:45:50,483 [INFO] inference_speech_editing_scale.py:74 || generated encoded_frames.shape: torch.Size([1, 4, 188]), which is 3.76 sec.
+14it [00:15,  1.69it/s]2025-08-06 10:45:50,576 [INFO] inference_speech_editing_scale.py:215 || i: 14, mask_interval: [[55, 86]], do infer
+2025-08-06 10:45:50,577 [WARNING] words_mismatch.py:88 || words count mismatch on 200.0% of the lines (2/1)
+2025-08-06 10:45:50,589 [INFO] inference_speech_editing_scale.py:55 || with direct encodec encoding before input, original audio length: 213 codec frames, which is 4.26 sec.
+2025-08-06 10:45:50,603 [INFO] voicecraft.py:708 || silence tokens: [1388, 1898, 131], note that if you are not using the pretrained encodec 6f79c6a8, make sure you specified it yourself, rather than using the default
+2025-08-06 10:45:50,830 [INFO] inference_speech_editing_scale.py:71 || inference on one sample take: 0.2406 sec.
+2025-08-06 10:45:50,830 [INFO] inference_speech_editing_scale.py:74 || generated encoded_frames.shape: torch.Size([1, 4, 189]), which is 3.78 sec.
+15it [00:15,  1.93it/s]2025-08-06 10:45:50,922 [INFO] inference_speech_editing_scale.py:215 || i: 15, mask_interval: [[55, 86]], do infer
+2025-08-06 10:45:50,922 [WARNING] words_mismatch.py:88 || words count mismatch on 200.0% of the lines (2/1)
+2025-08-06 10:45:50,934 [INFO] inference_speech_editing_scale.py:55 || with direct encodec encoding before input, original audio length: 213 codec frames, which is 4.26 sec.
+2025-08-06 10:45:50,947 [INFO] voicecraft.py:708 || silence tokens: [1388, 1898, 131], note that if you are not using the pretrained encodec 6f79c6a8, make sure you specified it yourself, rather than using the default
+2025-08-06 10:45:51,227 [INFO] inference_speech_editing_scale.py:71 || inference on one sample take: 0.2937 sec.
+2025-08-06 10:45:51,228 [INFO] inference_speech_editing_scale.py:74 || generated encoded_frames.shape: torch.Size([1, 4, 192]), which is 3.84 sec.
+16it [00:15,  2.07it/s]2025-08-06 10:45:51,321 [INFO] inference_speech_editing_scale.py:215 || i: 16, mask_interval: [[55, 86]], do infer
+2025-08-06 10:45:51,322 [WARNING] words_mismatch.py:88 || words count mismatch on 200.0% of the lines (2/1)
+2025-08-06 10:45:51,335 [INFO] inference_speech_editing_scale.py:55 || with direct encodec encoding before input, original audio length: 213 codec frames, which is 4.26 sec.
+2025-08-06 10:45:51,348 [INFO] voicecraft.py:708 || silence tokens: [1388, 1898, 131], note that if you are not using the pretrained encodec 6f79c6a8, make sure you specified it yourself, rather than using the default
+2025-08-06 10:45:51,541 [INFO] inference_speech_editing_scale.py:71 || inference on one sample take: 0.2068 sec.
+2025-08-06 10:45:51,542 [INFO] inference_speech_editing_scale.py:74 || generated encoded_frames.shape: torch.Size([1, 4, 187]), which is 3.74 sec.
+17it [00:16,  2.32it/s]2025-08-06 10:45:51,633 [INFO] inference_speech_editing_scale.py:215 || i: 17, mask_interval: [[55, 86]], do infer
+2025-08-06 10:45:51,634 [WARNING] words_mismatch.py:88 || words count mismatch on 200.0% of the lines (2/1)
+2025-08-06 10:45:51,646 [INFO] inference_speech_editing_scale.py:55 || with direct encodec encoding before input, original audio length: 213 codec frames, which is 4.26 sec.
+2025-08-06 10:45:51,660 [INFO] voicecraft.py:708 || silence tokens: [1388, 1898, 131], note that if you are not using the pretrained encodec 6f79c6a8, make sure you specified it yourself, rather than using the default
+2025-08-06 10:45:51,907 [INFO] inference_speech_editing_scale.py:71 || inference on one sample take: 0.2608 sec.
+2025-08-06 10:45:51,907 [INFO] inference_speech_editing_scale.py:74 || generated encoded_frames.shape: torch.Size([1, 4, 190]), which is 3.8 sec.
+18it [00:16,  2.43it/s]2025-08-06 10:45:51,999 [INFO] inference_speech_editing_scale.py:215 || i: 18, mask_interval: [[139, 171]], do infer
+2025-08-06 10:45:52,000 [WARNING] words_mismatch.py:88 || words count mismatch on 200.0% of the lines (2/1)
+2025-08-06 10:45:52,023 [INFO] inference_speech_editing_scale.py:55 || with direct encodec encoding before input, original audio length: 247 codec frames, which is 4.94 sec.
+2025-08-06 10:45:52,039 [INFO] voicecraft.py:708 || silence tokens: [1388, 1898, 131], note that if you are not using the pretrained encodec 6f79c6a8, make sure you specified it yourself, rather than using the default
+2025-08-06 10:45:52,439 [INFO] inference_speech_editing_scale.py:71 || inference on one sample take: 0.4162 sec.
+2025-08-06 10:45:52,439 [INFO] inference_speech_editing_scale.py:74 || generated encoded_frames.shape: torch.Size([1, 4, 229]), which is 4.58 sec.
+19it [00:17,  2.22it/s]2025-08-06 10:45:52,543 [INFO] inference_speech_editing_scale.py:215 || i: 19, mask_interval: [[139, 171]], do infer
+2025-08-06 10:45:52,544 [WARNING] words_mismatch.py:88 || words count mismatch on 200.0% of the lines (2/1)
+2025-08-06 10:45:52,562 [INFO] inference_speech_editing_scale.py:55 || with direct encodec encoding before input, original audio length: 247 codec frames, which is 4.94 sec.
+2025-08-06 10:45:52,574 [INFO] voicecraft.py:708 || silence tokens: [1388, 1898, 131], note that if you are not using the pretrained encodec 6f79c6a8, make sure you specified it yourself, rather than using the default
+2025-08-06 10:45:52,933 [INFO] inference_speech_editing_scale.py:71 || inference on one sample take: 0.3706 sec.
+2025-08-06 10:45:52,933 [INFO] inference_speech_editing_scale.py:74 || generated encoded_frames.shape: torch.Size([1, 4, 225]), which is 4.5 sec.
+20it [00:17,  2.16it/s]2025-08-06 10:45:53,033 [INFO] inference_speech_editing_scale.py:215 || i: 20, mask_interval: [[139, 171]], do infer
+2025-08-06 10:45:53,034 [WARNING] words_mismatch.py:88 || words count mismatch on 200.0% of the lines (2/1)
+2025-08-06 10:45:53,055 [INFO] inference_speech_editing_scale.py:55 || with direct encodec encoding before input, original audio length: 247 codec frames, which is 4.94 sec.
+2025-08-06 10:45:53,064 [INFO] voicecraft.py:708 || silence tokens: [1388, 1898, 131], note that if you are not using the pretrained encodec 6f79c6a8, make sure you specified it yourself, rather than using the default
+2025-08-06 10:45:53,506 [INFO] inference_speech_editing_scale.py:71 || inference on one sample take: 0.4509 sec.
+2025-08-06 10:45:53,506 [INFO] inference_speech_editing_scale.py:74 || generated encoded_frames.shape: torch.Size([1, 4, 230]), which is 4.6 sec.
+21it [00:18,  2.01it/s]2025-08-06 10:45:53,609 [INFO] inference_speech_editing_scale.py:215 || i: 21, mask_interval: [[139, 171]], do infer
+2025-08-06 10:45:53,611 [WARNING] words_mismatch.py:88 || words count mismatch on 200.0% of the lines (2/1)
+2025-08-06 10:45:53,628 [INFO] inference_speech_editing_scale.py:55 || with direct encodec encoding before input, original audio length: 247 codec frames, which is 4.94 sec.
+2025-08-06 10:45:53,644 [INFO] voicecraft.py:708 || silence tokens: [1388, 1898, 131], note that if you are not using the pretrained encodec 6f79c6a8, make sure you specified it yourself, rather than using the default
+2025-08-06 10:45:54,024 [INFO] inference_speech_editing_scale.py:71 || inference on one sample take: 0.3955 sec.
+2025-08-06 10:45:54,024 [INFO] inference_speech_editing_scale.py:74 || generated encoded_frames.shape: torch.Size([1, 4, 227]), which is 4.54 sec.
+22it [00:18,  1.99it/s]2025-08-06 10:45:54,125 [INFO] inference_speech_editing_scale.py:215 || i: 22, mask_interval: [[139, 171]], do infer
+2025-08-06 10:45:54,125 [WARNING] words_mismatch.py:88 || words count mismatch on 200.0% of the lines (2/1)
+2025-08-06 10:45:54,137 [INFO] inference_speech_editing_scale.py:55 || with direct encodec encoding before input, original audio length: 247 codec frames, which is 4.94 sec.
+2025-08-06 10:45:54,153 [INFO] voicecraft.py:708 || silence tokens: [1388, 1898, 131], note that if you are not using the pretrained encodec 6f79c6a8, make sure you specified it yourself, rather than using the default
+2025-08-06 10:45:54,476 [INFO] inference_speech_editing_scale.py:71 || inference on one sample take: 0.3387 sec.
+2025-08-06 10:45:54,476 [INFO] inference_speech_editing_scale.py:74 || generated encoded_frames.shape: torch.Size([1, 4, 228]), which is 4.56 sec.
+23it [00:19,  2.05it/s]2025-08-06 10:45:54,576 [INFO] inference_speech_editing_scale.py:215 || i: 23, mask_interval: [[139, 171]], do infer
+2025-08-06 10:45:54,577 [WARNING] words_mismatch.py:88 || words count mismatch on 200.0% of the lines (2/1)
+2025-08-06 10:45:54,590 [INFO] inference_speech_editing_scale.py:55 || with direct encodec encoding before input, original audio length: 247 codec frames, which is 4.94 sec.
+2025-08-06 10:45:54,605 [INFO] voicecraft.py:708 || silence tokens: [1388, 1898, 131], note that if you are not using the pretrained encodec 6f79c6a8, make sure you specified it yourself, rather than using the default
+2025-08-06 10:45:54,897 [INFO] inference_speech_editing_scale.py:71 || inference on one sample take: 0.3070 sec.
+2025-08-06 10:45:54,897 [INFO] inference_speech_editing_scale.py:74 || generated encoded_frames.shape: torch.Size([1, 4, 226]), which is 4.52 sec.
+24it [00:19,  2.14it/s]2025-08-06 10:45:54,997 [INFO] inference_speech_editing_scale.py:215 || i: 24, mask_interval: [[77, 210]], do infer
+2025-08-06 10:45:54,998 [WARNING] words_mismatch.py:88 || words count mismatch on 100.0% of the lines (1/1)
+2025-08-06 10:45:55,032 [INFO] inference_speech_editing_scale.py:55 || with direct encodec encoding before input, original audio length: 273 codec frames, which is 5.46 sec.
+2025-08-06 10:45:55,044 [INFO] voicecraft.py:708 || silence tokens: [1388, 1898, 131], note that if you are not using the pretrained encodec 6f79c6a8, make sure you specified it yourself, rather than using the default
+2025-08-06 10:45:55,382 [INFO] inference_speech_editing_scale.py:71 || inference on one sample take: 0.3504 sec.
+2025-08-06 10:45:55,383 [INFO] inference_speech_editing_scale.py:74 || generated encoded_frames.shape: torch.Size([1, 4, 155]), which is 3.1 sec.
+25it [00:20,  2.13it/s]2025-08-06 10:45:55,474 [INFO] inference_speech_editing_scale.py:215 || i: 25, mask_interval: [[77, 210]], do infer
+2025-08-06 10:45:55,475 [WARNING] words_mismatch.py:88 || words count mismatch on 100.0% of the lines (1/1)
+2025-08-06 10:45:55,488 [INFO] inference_speech_editing_scale.py:55 || with direct encodec encoding before input, original audio length: 273 codec frames, which is 5.46 sec.
+2025-08-06 10:45:55,506 [INFO] voicecraft.py:708 || silence tokens: [1388, 1898, 131], note that if you are not using the pretrained encodec 6f79c6a8, make sure you specified it yourself, rather than using the default
+2025-08-06 10:45:55,827 [INFO] inference_speech_editing_scale.py:71 || inference on one sample take: 0.3390 sec.
+2025-08-06 10:45:55,827 [INFO] inference_speech_editing_scale.py:74 || generated encoded_frames.shape: torch.Size([1, 4, 154]), which is 3.08 sec.
+26it [00:20,  2.16it/s]2025-08-06 10:45:55,917 [INFO] inference_speech_editing_scale.py:215 || i: 26, mask_interval: [[77, 210]], do infer
+2025-08-06 10:45:55,918 [WARNING] words_mismatch.py:88 || words count mismatch on 100.0% of the lines (1/1)
+2025-08-06 10:45:55,929 [INFO] inference_speech_editing_scale.py:55 || with direct encodec encoding before input, original audio length: 273 codec frames, which is 5.46 sec.
+2025-08-06 10:45:55,948 [INFO] voicecraft.py:708 || silence tokens: [1388, 1898, 131], note that if you are not using the pretrained encodec 6f79c6a8, make sure you specified it yourself, rather than using the default
+2025-08-06 10:45:56,319 [INFO] inference_speech_editing_scale.py:71 || inference on one sample take: 0.3900 sec.
+2025-08-06 10:45:56,320 [INFO] inference_speech_editing_scale.py:74 || generated encoded_frames.shape: torch.Size([1, 4, 157]), which is 3.14 sec.
+27it [00:21,  2.12it/s]2025-08-06 10:45:56,409 [INFO] inference_speech_editing_scale.py:215 || i: 27, mask_interval: [[77, 210]], do infer
+2025-08-06 10:45:56,410 [WARNING] words_mismatch.py:88 || words count mismatch on 100.0% of the lines (1/1)
+2025-08-06 10:45:56,422 [INFO] inference_speech_editing_scale.py:55 || with direct encodec encoding before input, original audio length: 273 codec frames, which is 5.46 sec.
+2025-08-06 10:45:56,441 [INFO] voicecraft.py:708 || silence tokens: [1388, 1898, 131], note that if you are not using the pretrained encodec 6f79c6a8, make sure you specified it yourself, rather than using the default
+2025-08-06 10:45:56,763 [INFO] inference_speech_editing_scale.py:71 || inference on one sample take: 0.3404 sec.
+2025-08-06 10:45:56,763 [INFO] inference_speech_editing_scale.py:74 || generated encoded_frames.shape: torch.Size([1, 4, 154]), which is 3.08 sec.
+28it [00:21,  2.16it/s]2025-08-06 10:45:56,850 [INFO] inference_speech_editing_scale.py:215 || i: 28, mask_interval: [[77, 210]], do infer
+2025-08-06 10:45:56,850 [WARNING] words_mismatch.py:88 || words count mismatch on 100.0% of the lines (1/1)
+2025-08-06 10:45:56,862 [INFO] inference_speech_editing_scale.py:55 || with direct encodec encoding before input, original audio length: 273 codec frames, which is 5.46 sec.
+2025-08-06 10:45:56,880 [INFO] voicecraft.py:708 || silence tokens: [1388, 1898, 131], note that if you are not using the pretrained encodec 6f79c6a8, make sure you specified it yourself, rather than using the default
+2025-08-06 10:45:57,136 [INFO] inference_speech_editing_scale.py:71 || inference on one sample take: 0.2745 sec.
+2025-08-06 10:45:57,136 [INFO] inference_speech_editing_scale.py:74 || generated encoded_frames.shape: torch.Size([1, 4, 150]), which is 3.0 sec.
+29it [00:21,  2.28it/s]2025-08-06 10:45:57,236 [INFO] inference_speech_editing_scale.py:215 || i: 29, mask_interval: [[77, 210]], do infer
+2025-08-06 10:45:57,237 [WARNING] words_mismatch.py:88 || words count mismatch on 100.0% of the lines (1/1)
+2025-08-06 10:45:57,258 [INFO] inference_speech_editing_scale.py:55 || with direct encodec encoding before input, original audio length: 273 codec frames, which is 5.46 sec.
+2025-08-06 10:45:57,271 [INFO] voicecraft.py:708 || silence tokens: [1388, 1898, 131], note that if you are not using the pretrained encodec 6f79c6a8, make sure you specified it yourself, rather than using the default
+2025-08-06 10:45:57,643 [INFO] inference_speech_editing_scale.py:71 || inference on one sample take: 0.3841 sec.
+2025-08-06 10:45:57,643 [INFO] inference_speech_editing_scale.py:74 || generated encoded_frames.shape: torch.Size([1, 4, 152]), which is 3.04 sec.
+30it [00:22,  2.19it/s]2025-08-06 10:45:57,732 [INFO] inference_speech_editing_scale.py:215 || i: 30, mask_interval: [[61, 69]], do infer
+2025-08-06 10:45:57,733 [WARNING] words_mismatch.py:88 || words count mismatch on 100.0% of the lines (1/1)
+2025-08-06 10:45:57,772 [INFO] inference_speech_editing_scale.py:55 || with direct encodec encoding before input, original audio length: 159 codec frames, which is 3.18 sec.
+2025-08-06 10:45:57,779 [INFO] voicecraft.py:708 || silence tokens: [1388, 1898, 131], note that if you are not using the pretrained encodec 6f79c6a8, make sure you specified it yourself, rather than using the default
+2025-08-06 10:45:59,892 [INFO] inference_speech_editing_scale.py:71 || inference on one sample take: 2.1196 sec.
+2025-08-06 10:45:59,892 [INFO] inference_speech_editing_scale.py:74 || generated encoded_frames.shape: torch.Size([1, 4, 268]), which is 5.36 sec.
+31it [00:24,  1.01it/s]2025-08-06 10:45:59,983 [INFO] inference_speech_editing_scale.py:215 || i: 31, mask_interval: [[61, 69]], do infer
+2025-08-06 10:45:59,985 [WARNING] words_mismatch.py:88 || words count mismatch on 100.0% of the lines (1/1)
+2025-08-06 10:45:59,995 [INFO] inference_speech_editing_scale.py:55 || with direct encodec encoding before input, original audio length: 159 codec frames, which is 3.18 sec.
+2025-08-06 10:46:00,005 [INFO] voicecraft.py:708 || silence tokens: [1388, 1898, 131], note that if you are not using the pretrained encodec 6f79c6a8, make sure you specified it yourself, rather than using the default
+2025-08-06 10:46:01,847 [INFO] inference_speech_editing_scale.py:71 || inference on one sample take: 1.8514 sec.
+2025-08-06 10:46:01,847 [INFO] inference_speech_editing_scale.py:74 || generated encoded_frames.shape: torch.Size([1, 4, 255]), which is 5.1 sec.
+32it [00:26,  1.28s/it]2025-08-06 10:46:01,933 [INFO] inference_speech_editing_scale.py:215 || i: 32, mask_interval: [[61, 69]], do infer
+2025-08-06 10:46:01,933 [WARNING] words_mismatch.py:88 || words count mismatch on 100.0% of the lines (1/1)
+2025-08-06 10:46:01,944 [INFO] inference_speech_editing_scale.py:55 || with direct encodec encoding before input, original audio length: 159 codec frames, which is 3.18 sec.
+2025-08-06 10:46:01,954 [INFO] voicecraft.py:708 || silence tokens: [1388, 1898, 131], note that if you are not using the pretrained encodec 6f79c6a8, make sure you specified it yourself, rather than using the default
+2025-08-06 10:46:04,495 [INFO] inference_speech_editing_scale.py:71 || inference on one sample take: 2.5511 sec.
+2025-08-06 10:46:04,495 [INFO] inference_speech_editing_scale.py:74 || generated encoded_frames.shape: torch.Size([1, 4, 297]), which is 5.94 sec.
+33it [00:29,  1.69s/it]2025-08-06 10:46:04,591 [INFO] inference_speech_editing_scale.py:215 || i: 33, mask_interval: [[61, 69]], do infer
+2025-08-06 10:46:04,592 [WARNING] words_mismatch.py:88 || words count mismatch on 100.0% of the lines (1/1)
+2025-08-06 10:46:04,602 [INFO] inference_speech_editing_scale.py:55 || with direct encodec encoding before input, original audio length: 159 codec frames, which is 3.18 sec.
+2025-08-06 10:46:04,612 [INFO] voicecraft.py:708 || silence tokens: [1388, 1898, 131], note that if you are not using the pretrained encodec 6f79c6a8, make sure you specified it yourself, rather than using the default
+2025-08-06 10:46:06,484 [INFO] inference_speech_editing_scale.py:71 || inference on one sample take: 1.8819 sec.
+2025-08-06 10:46:06,484 [INFO] inference_speech_editing_scale.py:74 || generated encoded_frames.shape: torch.Size([1, 4, 257]), which is 5.14 sec.
+34it [00:31,  1.78s/it]2025-08-06 10:46:06,573 [INFO] inference_speech_editing_scale.py:215 || i: 34, mask_interval: [[61, 69]], do infer
+2025-08-06 10:46:06,573 [WARNING] words_mismatch.py:88 || words count mismatch on 100.0% of the lines (1/1)
+2025-08-06 10:46:06,585 [INFO] inference_speech_editing_scale.py:55 || with direct encodec encoding before input, original audio length: 159 codec frames, which is 3.18 sec.
+2025-08-06 10:46:06,595 [INFO] voicecraft.py:708 || silence tokens: [1388, 1898, 131], note that if you are not using the pretrained encodec 6f79c6a8, make sure you specified it yourself, rather than using the default
+2025-08-06 10:46:10,793 [INFO] inference_speech_editing_scale.py:71 || inference on one sample take: 4.2077 sec.
+2025-08-06 10:46:10,794 [INFO] inference_speech_editing_scale.py:74 || generated encoded_frames.shape: torch.Size([1, 4, 395]), which is 7.9 sec.
+35it [00:35,  2.55s/it]2025-08-06 10:46:10,909 [INFO] inference_speech_editing_scale.py:215 || i: 35, mask_interval: [[61, 69]], do infer
+2025-08-06 10:46:10,911 [WARNING] words_mismatch.py:88 || words count mismatch on 100.0% of the lines (1/1)
+2025-08-06 10:46:10,932 [INFO] inference_speech_editing_scale.py:55 || with direct encodec encoding before input, original audio length: 159 codec frames, which is 3.18 sec.
+2025-08-06 10:46:10,940 [INFO] voicecraft.py:708 || silence tokens: [1388, 1898, 131], note that if you are not using the pretrained encodec 6f79c6a8, make sure you specified it yourself, rather than using the default
+2025-08-06 10:46:13,623 [INFO] inference_speech_editing_scale.py:71 || inference on one sample take: 2.6909 sec.
+2025-08-06 10:46:13,623 [INFO] inference_speech_editing_scale.py:74 || generated encoded_frames.shape: torch.Size([1, 4, 296]), which is 5.92 sec.
+36it [00:38,  2.63s/it]36it [00:38,  1.07s/it]
